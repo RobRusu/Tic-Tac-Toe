@@ -42,7 +42,7 @@ function GameController(
   const getActivePlayer = () => activePlayer;
 
   const playRound = (x, y) => {
-    if (gameboard.getBoard()[x][y] !== ' ') return console.log(gameboard.getBoard());;
+    if (gameboard.getBoard()[x][y] !== ' ') return console.log(gameboard.getBoard());
     gameboard.getBoard()[x][y] = getActivePlayer().mark;
     winner();
     switchPlayerTurn();
@@ -73,9 +73,51 @@ function GameController(
         console.log(`Winner is ${getActivePlayer().mark}.`);
         }
   } 
-  return {playRound, getActivePlayer}
+  return {playRound, getActivePlayer, switchPlayerTurn}
 };
 
 const game = GameController();
+
+
+
+// create IIFE to display the gameboard
+
+const display = (function () {
+  const board = gameboard.getBoard();
+  const boardDiv = document.querySelector('.board')
+  board.forEach((row, index) =>{
+    const rowNumber = index;
+    row.forEach((element, index) => {
+      const button = document.createElement('button');
+      button.textContent = element;
+      button.classList.add('cell');
+      button.dataset.row = rowNumber;
+      button.dataset.column = index;
+      // button.addEventListener('click', game.playRound(rowNumber, index))
+      boardDiv.appendChild(button);
+    })
+  })
+
+  const buttons = document.querySelectorAll('.board > button');
+  buttons.forEach((button) => {
+    button.addEventListener('click', playRound);
+  })
+
+  function playRound(){
+    board[this.dataset.row][this.dataset.column] = game.getActivePlayer().mark;
+    console.log(`I am ${board[this.dataset.row][this.dataset.column]}`);
+    GameController.switchPlayerTurn;
+  }
+
+  const displayBoard = () => board;
+
+  return {displayBoard}
+
+})();
+
+function placeholder() {
+  console.log("I am working!");
+}
+
 
 
