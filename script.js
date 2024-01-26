@@ -37,6 +37,8 @@ function GameController(
 
   const winnerAnnounce = document.querySelector('.winner');
   const dialog = document.querySelector('dialog');
+  const board = gameboard.getBoard();
+  const restartBtn = document.querySelectorAll('.restart');
 
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -80,6 +82,25 @@ function GameController(
         console.log(`Winner is ${getActivePlayer().mark}.`);
         }
   } 
+
+  const emptyCells = () => {
+    const boardDiv = document.querySelectorAll('.board > button')
+    board.forEach((row, index)=> {
+      const rowNumber = index;
+      row.forEach((cell, index)=> {
+        board[rowNumber][index] = ' ';
+        cell.textContent = ' ';
+      })
+    })
+    boardDiv.forEach((cell) => {
+      cell.textContent = ' ';
+    })
+    if (activePlayer.mark === 'O') {switchPlayerTurn()};
+    dialog.close();
+  }
+  restartBtn.forEach((btn) => {
+    btn.addEventListener('click', emptyCells);
+  })
   return {playRound, getActivePlayer, switchPlayerTurn, winner}
 };
 
@@ -117,5 +138,4 @@ const display = (function () {
     game.switchPlayerTurn();
   }
 })();
-
 
