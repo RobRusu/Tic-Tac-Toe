@@ -2,4 +2,45 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  align-self: center;
+}
+
+.board > button {
+  width: 5vw;
+  height: 5vh;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.header > .scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+  margin: 5vh 0;
+}
+
+dialog {
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  text-align: center;
+  width: 30vw;
+  height: 20vh;
+  background-color: rgba(185, 146, 146, 0);
+  border: none;
+  font-size: min(5vh, 5vw);
+  font-weight: bold;
 }

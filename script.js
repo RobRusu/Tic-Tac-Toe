@@ -25,15 +25,18 @@ function GameController(
   const players = [
     {
       name: playerOneName,
-      mark: 'x',
+      mark: 'X',
     },
     {
       name: playerTwoName,
-      mark: 'o',
+      mark: 'O',
     }
   ]
 
   let activePlayer = players[0];
+
+  const winnerAnnounce = document.querySelector('.winner');
+  const dialog = document.querySelector('dialog');
 
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -42,7 +45,7 @@ function GameController(
   const getActivePlayer = () => activePlayer;
 
   const playRound = (x, y) => {
-    if (gameboard.getBoard()[x][y] !== ' ') return console.log(gameboard.getBoard());;
+    if (gameboard.getBoard()[x][y] !== ' ') return console.log(gameboard.getBoard());
     gameboard.getBoard()[x][y] = getActivePlayer().mark;
     winner();
     switchPlayerTurn();
@@ -60,6 +63,8 @@ function GameController(
         }
       })
       if (counter === 3) {
+        dialog.showModal();
+        winnerAnnounce.textContent = `Winner is ${row[0]}.`;
         console.log(`Winner is ${row[0]}.`);
       }
     })
@@ -70,12 +75,47 @@ function GameController(
       (gameboard.getBoard()[0][2] + gameboard.getBoard()[1][1] + gameboard.getBoard()[2][0] === getActivePlayer().mark.repeat(3)) ||
       (gameboard.getBoard()[0][0] + gameboard.getBoard()[1][1] + gameboard.getBoard()[2][2] === getActivePlayer().mark.repeat(3))
       ){
+        dialog.showModal();
+        winnerAnnounce.textContent = `Winner is ${getActivePlayer().mark}.`;
         console.log(`Winner is ${getActivePlayer().mark}.`);
         }
   } 
-  return {playRound, getActivePlayer}
+  return {playRound, getActivePlayer, switchPlayerTurn, winner}
 };
 
 const game = GameController();
+
+
+
+// create IIFE to display the gameboard
+
+const display = (function () {
+  const board = gameboard.getBoard();
+  const boardDiv = document.querySelector('.board')
+  board.forEach((row, index) =>{
+    const rowNumber = index;
+    row.forEach((element, index) => {
+      const button = document.createElement('button');
+      button.textContent = element;
+      button.classList.add('cell');
+      button.dataset.row = rowNumber;
+      button.dataset.column = index;
+      boardDiv.appendChild(button);
+    })
+  })
+
+  const buttons = document.querySelectorAll('.board > button');
+  buttons.forEach((button) => {
+    button.addEventListener('click', playRound);
+  })
+
+  function playRound(){
+    if (gameboard.getBoard()[this.dataset.row][this.dataset.column] !== ' ') return;
+    board[this.dataset.row][this.dataset.column] = game.getActivePlayer().mark;
+    this.textContent = board[this.dataset.row][this.dataset.column];
+    game.winner();
+    game.switchPlayerTurn();
+  }
+})();
 
 
