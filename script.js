@@ -36,7 +36,7 @@ function GameController(
   let activePlayer = players[0];
 
   const winnerAnnounce = document.querySelector('.winner');
-  const dialog = document.querySelector('dialog');
+  const dialog = document.querySelector('.results');
   const board = gameboard.getBoard();
   const restartBtn = document.querySelectorAll('.restart');
 
@@ -154,5 +154,36 @@ const display = (function () {
     game.winner();
     game.switchPlayerTurn();
   }
+})();
+
+
+// IIFE to allow players to input their own names
+
+const Names = (function () {
+  const dialogNames = document.querySelector('.names')
+  const changeNames = document.querySelector('.changeName');
+  const playerOne = document.querySelector('.playerOne');
+  const playerTwo = document.querySelector('.playerTwo');
+  const playerOneNew = document.querySelector('#playerOne');
+  const playerTwoNew = document.querySelector('#playerTwo');
+  const finish = document.querySelector('.finish');
+
+  changeNames.addEventListener('click', () => {
+    dialogNames.showModal();
+  });
+
+  finish.addEventListener('click', () => {
+    playerOne.textContent = playerOneNew.value;
+    playerTwo.textContent = playerTwoNew.value;
+    if (!playerOneNew.value && !playerTwoNew.value){
+      playerOne.textContent = 'Player One';
+      playerTwo.textContent = 'Player Two';
+    } else if(!playerOneNew.value) {
+      playerOne.textContent = 'Player One';
+    } else if (!playerTwoNew.value) {
+      playerTwo.textContent = 'Player Two';
+    }
+    dialogNames.close();
+  })
 })();
 

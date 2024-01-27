@@ -8,16 +8,24 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <button class="changeName">Change names</button>
   <div class="header">
     <div class="scoreboard">
       <p class="playerOne">Player One</p>
-      <p class="score">0 - 0</p>
+      <p>-</p>
       <p class="playerTwo">Player Two</p>
     </div>
     <button class="restart">Restart</button>
-    <dialog>
+    <dialog class="results">
       <p class="winner"></p>
       <button class="restart">Restart</button>
+    </dialog>
+    <dialog class="names">
+      <label for="playerOne">Player One: </label>
+      <input type="text" id="playerOne" name="playerOne">
+      <label for="playerTwo">Player Two: </label>
+      <input type="text" id="playerTwo" name="playerTwo">
+      <button class="finish">Finish</button>
     </dialog>
   </div>
   <div class="board">
