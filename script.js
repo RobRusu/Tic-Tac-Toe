@@ -55,6 +55,22 @@ function GameController(
   }
 
   const winner = () => {
+    let counter = 0;
+    gameboard.getBoard().forEach((row) => {
+      row.forEach((cell) => {
+        if (cell !== ' ') {
+          counter++;
+        } else {
+          counter = 0;
+        }
+      })
+      if (counter === 9) {
+        dialog.showModal();
+        winnerAnnounce.textContent = 'It is a draw!';
+        console.log('It is a draw!');
+      }
+    })
+
     gameboard.getBoard().forEach((row) => {
       let counter = 0;
       row.forEach((cell) => {
@@ -70,6 +86,7 @@ function GameController(
         console.log(`Winner is ${row[0]}.`);
       }
     })
+
     if (
       (gameboard.getBoard()[0][0] + gameboard.getBoard()[1][0] + gameboard.getBoard()[2][0] === getActivePlayer().mark.repeat(3)) || 
       (gameboard.getBoard()[0][1] + gameboard.getBoard()[1][1] + gameboard.getBoard()[2][1] === getActivePlayer().mark.repeat(3)) || 
