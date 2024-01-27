@@ -39,9 +39,18 @@ function GameController(
   const dialog = document.querySelector('.results');
   const board = gameboard.getBoard();
   const restartBtn = document.querySelectorAll('.restart');
+  const playerOne = document.querySelector('.one');
+  const playerTwo = document.querySelector('.two');
 
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    if (activePlayer === players[0]){
+      playerTwo.removeAttribute('active');
+      playerOne.setAttribute('active', 'activePlayer');
+    } else if (activePlayer === players[1]){
+      playerOne.removeAttribute('active');
+      playerTwo.setAttribute('active', 'activePlayer');
+    }
   };
 
   const getActivePlayer = () => activePlayer;

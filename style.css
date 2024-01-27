@@ -10,6 +10,22 @@ body {
   flex-direction: column;
 }
 
+.changeName,
+.restart {
+  align-self: end;
+  width: 10vw;
+  border: none;
+  margin-bottom: 1vh;
+  padding: 0.5rem;
+  background-color: #080747;
+  color: white;
+  font-weight: bold;
+  &:hover{
+    background-color: rgb(7, 7, 141);
+    cursor: pointer;
+  }
+}
+
 .board {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -19,22 +35,45 @@ body {
 }
 
 .board > button {
-  width: 5vw;
-  height: 5vh;
+  width: 10vw;
+  height: 10vh;
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
+  font-size: 4vh;
+  &:hover{
+    background-color: #eaecea;
+  }
 }
 
-.header > .scoreboard {
+.header {
   display: flex;
-  justify-content: center;
-  gap: 1vw;
-  margin: 5vh 0;
+  justify-content: space-between;
+  width: 30vw;
+  height: 10vh;
+  margin: 0 auto;
+}
+
+.header > div {
+  width: 50%;
+}
+
+.header > div > p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.header > div > p~p{
+  height: 100%;
+  font-size: min(6vh, 6vw);
+}
+
+.header > div:nth-child(1){
+  border-right: 3px solid black;
 }
 
 .results {
   position: absolute;
-  top: 10%;
+  top: 50%;
   left: 35%;
   text-align: center;
   width: 30vw;
@@ -43,4 +82,8 @@ body {
   border: none;
   font-size: min(5vh, 5vw);
   font-weight: bold;
+}
+
+div[active] {
+  border: 2px solid black;
 }

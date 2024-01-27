@@ -9,17 +9,23 @@
 </head>
 <body>
   <button class="changeName">Change names</button>
+  <button class="restart">Restart</button>
   <div class="header">
-    <div class="scoreboard">
+    <div class="one" active="activePlayer">
       <p class="playerOne">Player One</p>
-      <p>-</p>
-      <p class="playerTwo">Player Two</p>
+      <p>X</p>
     </div>
-    <button class="restart">Restart</button>
+    <div class="two">
+      <p class="playerTwo">Player Two</p>
+      <p>O</p>
+    </div>
+    
+
     <dialog class="results">
       <p class="winner"></p>
       <button class="restart">Restart</button>
     </dialog>
+
     <dialog class="names">
       <label for="playerOne">Player One: </label>
       <input type="text" id="playerOne" name="playerOne">
@@ -27,6 +33,7 @@
       <input type="text" id="playerTwo" name="playerTwo">
       <button class="finish">Finish</button>
     </dialog>
+
   </div>
   <div class="board">
   </div>
